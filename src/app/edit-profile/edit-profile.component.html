@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="ProfileForm" (ngSubmit)="Update(ProfileForm.value)">
+    <div class="container">
+      <div class="outer" (click)="selectImage()"
+        [ngStyle]="{'background-image': 'url(' + photo + ')'}">
+          <div class="inner">
+             <ion-icon name="camera" class="camera-icon"></ion-icon>
+          </div>
+       </div>
+    </div>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <p>{{currentUser.username}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input type="text" formControlName="Fname" [(ngModel)]="currentUser.Fname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input type="text" formControlName="Lname" [(ngModel)]="currentUser.Lname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Mobile</ion-label>
+      <ion-input type="number" formControlName="mobile" [(ngModel)]="currentUser.phone"></ion-input>
+    </ion-item>
+    
+    <ion-button [disabled]="!ProfileForm.valid" expand="full" color="primary" style="margin-top: 20px;"
+      type="submit"> Update
+    </ion-button>
+  </form>
+</ion-content>

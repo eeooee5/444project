@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{Order.itemname}} Invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item>
+    <ion-label>
+      From: {{Order.Supname}}
+      </ion-label>
+  </ion-item>
+  <ion-item>
+<ion-label>
+Catoons:{{Order.cartoons}}x{{Order.numperc}}
+</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Items:{{Order.itemsnum}}
+      </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Total price:{{total}} BD
+      </ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>

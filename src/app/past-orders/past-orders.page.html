@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>favorite List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    <ion-radio-group [(ngModel)]="Supplier">
+    <ion-list-header>
+    <ion-label>Supplier</ion-label>
+    <ion-button (click)="sort()">Reorder</ion-button>
+    </ion-list-header>
+    
+    <ion-item *ngFor="let sup of suppliers">
+    <ion-label>{{sup}}</ion-label>
+    <ion-radio slot="start" value={{sup}}></ion-radio>
+    </ion-item>
+    <ion-item >
+      <ion-label>All Suppliers</ion-label>
+      <ion-radio slot="start" value='All Suppliers'></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+   <ion-list>
+   
+   <div *ngFor="let order of Orders" (click)="openOrder(order)">
+    <div *ngIf="order.delivered==true">
+   <ion-item *ngIf="Supplier =='All Suppliers'||Supplier == order.Supname||Supplier == ''" >
+   <ion-label>{{order.itemname}}</ion-label>          <ion-label> Q:{{order.total}}</ion-label>
+     </ion-item>
+    </div>
+  </div>
+  </ion-list>
+
+

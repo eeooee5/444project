@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <img src="../../assets/icon/favicon.png" width="40px"  height="40px"/>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="searched"><ion-icon name="search-outline"></ion-icon></ion-button>
+      <ion-button *ngIf="searched" (click)="select()">add</ion-button>
+      <ion-button *ngIf="searched" (click)="searched = false">edit</ion-button>
+      <ion-button *ngIf="!searched" (click)="showSchedule1()">View All</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!searched">
+    <ion-item>
+      <ion-label>Pick date</ion-label>
+      <ion-input value="{{ date | date: 'yyyy-MM-dd' }}" id="date" class="ion-text-end"></ion-input>
+      <ion-popover trigger="date" size="cover">
+        <ng-template>
+          <ion-datetime presentation="date" [(ngModel)]="date" locale="sl-SI" [min]="minDate"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Pick Start Time</ion-label>
+      <ion-input value="{{ starttime | date: 'hh:mm a' }}" id="starttime" class="ion-text-end"></ion-input>
+      <ion-popover trigger="starttime" size="cover">
+        <ng-template>
+          <ion-datetime presentation="time" [(ngModel)]="starttime"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Pick End Time</ion-label>
+      <ion-input value="{{ endtime | date: 'hh:mm a' }}" id="endtime" class="ion-text-end"></ion-input>
+      <ion-popover trigger="endtime" size="cover">
+        <ng-template>
+          <ion-datetime presentation="time" [(ngModel)]="endtime"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <ion-button expand="full" (click)="search()">search</ion-button>
+  </div>
+
+  <div *ngIf="searched">
+    <ion-list lines="full">
+      <ion-item-sliding *ngFor="let x of users; let i = index">
+        <ion-item>
+          <ion-label>
+            {{x.Fname}} {{x.Lname}}
+            <p>{{x.username}}</p>
+          </ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="x.isChecked"></ion-checkbox>  
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option (click)="showSchedule(i)">Show Schedule</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

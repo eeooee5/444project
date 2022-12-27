@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+ 
+    <ion-title>
+      Items
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list >
+    <ion-radio-group [(ngModel)]="Supplier">
+    <ion-list-header>
+    <ion-label>Supplier</ion-label>
+    </ion-list-header>
+    <ion-button slot="start" (click)="importjson()">Import</ion-button>
+    <ion-button slot="end" (click)="exportjson()">Export</ion-button>
+    <ion-item *ngFor="let sup of suppliers">
+    <ion-label>{{sup}}</ion-label>
+    <ion-radio slot="start" value={{sup}}></ion-radio>
+    </ion-item>
+    <ion-item >
+      <ion-label>All Suppliers</ion-label>
+      <ion-radio slot="start" value='All Suppliers'></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+   <ion-list>
+   <div *ngFor="let item of items" (click)="openItem(item)">
+   <ion-item *ngIf="Supplier =='All Suppliers'||Supplier == item.supplier||Supplier == ''" [color]="item.quantity>item.threshold ? 'light': 'warning'">
+   <ion-label>{{item.name}}</ion-label>         <ion-label> from {{item.supplier}}</ion-label>  <ion-label> Price:{{item.price}}</ion-label>
+     </ion-item>
+    </div>
+  </ion-list>
+

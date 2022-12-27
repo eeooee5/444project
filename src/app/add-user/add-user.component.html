@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <img src="../../assets/icon/favicon.png" width="40px"  height="40px"/>
+      <br/>
+      Add User
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="RegisterForm" (ngSubmit)="Register(RegisterForm.value)">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['email'].hasError('required') && RegisterForm.controls['email'].touched">
+      <p style="color:red">Sorry, field email is required!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['email'].hasError('pattern') && RegisterForm.controls['email'].touched">
+      <p style="color:red">Sorry, email not correct</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['username'].hasError('required') && RegisterForm.controls['username'].touched">
+      <p style="color:red">Sorry, field username is required!</p>
+    </ion-item>
+    <ion-item
+      *ngIf="RegisterForm.controls['username'].hasError('pattern') && RegisterForm.controls['username'].touched">
+      <p style="color:red">Sorry, only letters and numbers are allowed!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['username'].hasError('minlength') && RegisterForm.controls['username'].touched">
+      <p style="color:red">Sorry, minimum username length is 4!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['username'].hasError('maxlength') && RegisterForm.controls['username'].touched">
+      <p style="color:red">Sorry, maximum username length is 15!</p>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['password'].hasError('required') && RegisterForm.controls['password'].touched">
+      <p style="color:red">Sorry, field password is required!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['password'].hasError('pattern') && RegisterForm.controls['password'].touched">
+      <p style="color:red">Sorry, password should contains at least 1 small letter, capital letter, number, special
+        characters</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['password'].hasError('minlength') && RegisterForm.controls['password'].touched">
+      <p style="color:red">Sorry, minimum password length is 6!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['password'].hasError('maxlength') && RegisterForm.controls['password'].touched">
+      <p style="color:red">Sorry, maximum password length is 20!</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input type="text" formControlName="Fname"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Fname'].hasError('required') && RegisterForm.controls['Fname'].touched">
+      <p style="color:red">Sorry, field first name is required!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Fname'].hasError('minlength') && RegisterForm.controls['Fname'].touched">
+      <p style="color:red">Sorry, minimum length is 3!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Fname'].hasError('maxlength') && RegisterForm.controls['Fname'].touched">
+      <p style="color:red">Sorry, maximum length is 15!</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input type="text" formControlName="Lname"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Lname'].hasError('required') && RegisterForm.controls['Lname'].touched">
+      <p style="color:red">Sorry, field last name is required!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Lname'].hasError('minlength') && RegisterForm.controls['Lname'].touched">
+      <p style="color:red">Sorry, minimum length is 3!</p>
+    </ion-item>
+    <ion-item *ngIf="RegisterForm.controls['Lname'].hasError('maxlength') && RegisterForm.controls['Lname'].touched">
+      <p style="color:red">Sorry, maximum length is 15!</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select the type</ion-label>
+      <ion-select formControlName="type">
+        <ion-select-option value="Employee">Employee</ion-select-option>
+        <ion-select-option value="Suppliers">Suppliers</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-button [disabled]="!RegisterForm.valid" expand="full" color="primary" style="margin-top: 20px;"
+      type="submit"> Register
+    </ion-button>
+  </form>
+</ion-content>

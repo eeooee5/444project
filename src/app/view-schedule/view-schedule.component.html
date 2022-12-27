@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Schedules</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">CLOSE</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngFor="let user of user">
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-label color="primary">
+            {{user.username}}
+            <p>{{user.Fname}} {{user.Lname}}</p>
+          </ion-label></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Date</ion-col>
+        <ion-col>Time Start</ion-col>
+        <ion-col>Time End</ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngFor="let x of sch">
+      <ion-grid *ngIf="user.path.split('/profile')[0] === x.path.split('/schedule')[0]">
+        <ion-row>
+          <ion-col>{{(x.Date).split('T')[0]}}</ion-col>
+          <ion-col>{{(x.StartTime).split('T')[1].split('+')[0]}}</ion-col>
+          <ion-col>{{(x.EndTime).split('T')[1].split('+')[0]}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+</ion-content>

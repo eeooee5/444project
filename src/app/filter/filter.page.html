@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+    
+    </ion-buttons>
+ 
+    <ion-title>
+      List of Items
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list >
+   <ion-item>Filters</ion-item>
+   <ion-item>
+    Supplier:
+    <ion-select interface="action-sheet" [(ngModel)]="Supplier">
+      <ion-select-option  value="All">All</ion-select-option>
+      <ion-select-option *ngFor="let sup of suppliers" value="{{sup}}">{{sup}}</ion-select-option>
+    </ion-select>
+   </ion-item>
+   <ion-item>
+    Quantity less than&nbsp;
+    <ion-input [(ngModel)]="quan"></ion-input>
+   </ion-item>
+   <ion-item>    Price less than&nbsp;
+    <ion-input [(ngModel)]="price"></ion-input></ion-item>
+   <ion-item>
+    Category:
+    <ion-select interface="action-sheet" [(ngModel)]="Cat">
+      <ion-select-option  value="All">All</ion-select-option>
+      <ion-select-option *ngFor="let cat of Category" value="{{cat}}">{{cat}}</ion-select-option>
+    </ion-select>
+   </ion-item>
+   <ion-item>
+    Fast moving?
+    <ion-select interface="action-sheet" [(ngModel)]="bfast">
+      <ion-select-option  [value]="true">Yes</ion-select-option>
+      <ion-select-option  [value]="false">No</ion-select-option>
+    </ion-select>
+   </ion-item>
+   <ion-list>
+  
+   <div *ngFor="let item of items" (click)="openItem(item)">
+    
+   <ion-item [color]="item.supplier==Supplier||!'All'? 'primary':'light'"
+    [color]="item.category==Cat||!'All'? 'primary':'light'"
+    [color]="item.fastmoving==bfast? 'primary':'light'"
+    [color]="item.quantity < quan? 'primary':'light'"
+    [color]="item.price < price? 'primary':'light'">
+   <ion-label>{{item.name}}</ion-label>         <ion-label> from {{item.supplier}}</ion-label>  <ion-label> Q:{{item.quantity}}</ion-label>
+     </ion-item>
+  
+    </div>
+  </ion-list>
+
